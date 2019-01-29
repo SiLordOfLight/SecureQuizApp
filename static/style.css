@@ -1,0 +1,22 @@
+#headerRow {
+  background-color: blanchedalmond;
+}
+
+#headerRow #leftCol {
+  padding-left: 40%;
+}
+
+#headerRow #rightCol {
+  padding-top: 1%;
+  padding-right: 2%;
+  padding-bottom: 1%;
+}
+
+#startOverButton {
+  text-align: center;
+  outline: darkcyan 1px solid;
+}
+
+#startOverButton:hover {
+  background-color: cyan;
+}

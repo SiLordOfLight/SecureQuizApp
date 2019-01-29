@@ -1,32 +1,73 @@
 <!doctype html>
 <html>
-<head>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-  <title>{% block title %}{% endblock %} - Super Ancient Sand</title>
-</head>
+  <head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 
-<body>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 
-<div id="content">{% block content %}{% endblock %}</div>
+    <title>Government Quiz - {{page_title}}</title>
+  </head>
 
-<div id="footer">
+  <body>
+    <header>
+      <div class="row" id="headerRow">
+        <div class="col-9" id="leftCol">
+          <h1 id="mainTitle">Government Quiz</h1>
+        </div>
 
- {% if 'firstQuestion' in session %}
-   First Answer: {{ session['firstQuestion'] }}<br>
- {% endif %}
+        <div class="col-3" id="rightCol">
+          <h2 id="startOverButton">Start Over</h2>
+        </div>
+      </div>
+    </header>
 
- {% if 'secondQuestion' in session %}
-   Second Answer: {{ session['secondQuestion'] }}<br>
- {% endif %}
+    {% if page_type is not "question" %}
+      {% block content %}
 
- {% if 'thirdQuestion' in session %}
-   Third Answer: {{ session['thirdQuestion'] }}<br>
- {% endif %}
+      {% endblock %}
+    {% endif %}
 
- <a href="/startOver">Start over</a>
+    {% if page_type is "question" %}
+      <div class="form-holder">
+        <form class="question-form" action="/question?qnum={{qnum + 1}}" method="post">
+          <h5 id="question">{{question}}</h5>
 
-</div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="answers" id="answersA" value="A">
+            <label class="form-check-label" for="answersA">
+              {{answers[0]}}
+            </label>
+          </div>
 
-</body>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="answers" id="answersB" value="B">
+            <label class="form-check-label" for="answersB">
+              {{answers[1]}}
+            </label>
+          </div>
+
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="answers" id="answersC" value="C">
+            <label class="form-check-label" for="answersC">
+              {{answers[2]}}
+            </label>
+          </div>
+
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="answers" id="answersD" value="D">
+            <label class="form-check-label" for="answersD">
+              {{answers[3]}}
+            </label>
+          </div>
+
+          <button type="submit" class="btn btn-primary">{% if last %}Next Question{%else%}Finish!{% endif %}</button>
+        </form>
+      </div>
+    {% endif %}
+
+  </body>
 
 </html>
