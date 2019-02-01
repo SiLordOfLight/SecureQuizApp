@@ -13,11 +13,6 @@
   padding-bottom: 1%;
 }
 
-#startOverButton {
-  text-align: center;
-  outline: darkcyan 1px solid;
-}
-
 #startOverButton:hover {
   background-color: cyan;
 }
