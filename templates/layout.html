@@ -19,12 +19,9 @@
         </div>
 
         <div class="col-3" id="rightCol">
-          <h2 id="startOverButton">Start Over</h2>
-          <script type="text/javascript">
-            $("#startOverButton").click(function() {
-              document.href = "/";
-            })
-          </script>
+          <form class="hh" action="/" method="get">
+            <button type="submit" name="button" class="btn btn-primary" id="startOverButton">Start Over</button>
+          </form>
         </div>
       </div>
     </header>
