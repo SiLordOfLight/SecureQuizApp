@@ -1,0 +1,4 @@
+set Q1={"question":"Which Amendment to the Constitution guaranteed women's right to vote?", "A":"25th", "B":"11th", "C":"19th", "D":"1st", "correct":"C"}
+set Q2={"question":"What was the 25th Amendment?", "A": "Presidential succession", "B":"Women's right to vote", "C":"Alcohol Prohibition", "D":"Right to bear arms", "correct":"A"}
+set Q3={"question":"Where do budget bills originate?", "A":"The Senate", "B":"The White House", "C":"OMB", "D":"The House", "correct":"D"}
+set Q4={"question":"Who follows the Vice President in the Presidential succession?", "A":"Secretary of State", "B":"The President Pro Tempore", "C":"The Speaker of the House", "D":"The Postmaster General", "correct":"C"}

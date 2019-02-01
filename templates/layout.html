@@ -24,46 +24,50 @@
       </div>
     </header>
 
-    {% if page_type is not "question" %}
+    {% if page_type != "question" %}
       {% block content %}
 
       {% endblock %}
     {% endif %}
 
-    {% if page_type is "question" %}
-      <div class="form-holder">
-        <form class="question-form" action="/question?qnum={{qnum + 1}}" method="post">
+    {% if page_type == "question" %}
+      <div class="form-holder" style="padding-left: 30px; padding-top: 15px;">
+        <form class="question-form" action="{% if last != True %}/question?qnum={{qnum + 1}}{%else%}/finPage{%endif%}" method="post">
           <h5 id="question">{{question}}</h5>
 
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="answers" id="answersA" value="A">
+            <input class="form-check-input" type="radio" name="answer" id="answersA" value="A">
             <label class="form-check-label" for="answersA">
               {{answers[0]}}
             </label>
           </div>
 
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="answers" id="answersB" value="B">
+            <input class="form-check-input" type="radio" name="answer" id="answersB" value="B">
             <label class="form-check-label" for="answersB">
               {{answers[1]}}
             </label>
           </div>
 
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="answers" id="answersC" value="C">
+            <input class="form-check-input" type="radio" name="answer" id="answersC" value="C">
             <label class="form-check-label" for="answersC">
               {{answers[2]}}
             </label>
           </div>
 
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="answers" id="answersD" value="D">
+            <input class="form-check-input" type="radio" name="answer" id="answersD" value="D">
             <label class="form-check-label" for="answersD">
               {{answers[3]}}
             </label>
           </div>
 
-          <button type="submit" class="btn btn-primary">{% if last %}Next Question{%else%}Finish!{% endif %}</button>
+          <br>
+          <br>
+
+
+          <button type="submit" class="btn btn-primary">{% if last %}Finish!{%else%}Next Question{% endif %}</button>
         </form>
       </div>
     {% endif %}
