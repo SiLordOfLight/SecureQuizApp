@@ -1,5 +1,5 @@
 import os
-from flask import Flask, url_for, render_template, request
+from flask import Flask, url_for, render_template, request, redirect
 from flask import redirect
 from flask import session
 import json
@@ -25,11 +25,15 @@ for i in range(1,numberOfQuestions+1):
 @app.route("/")
 def render_main():
     session["score"] = 0
+    session["finished"] = 0
 
     return render_template('home.html')
 
 @app.route('/question', methods=['GET','POST'])
 def renderQuestionPage():
+    if session["finishes"] == 1:
+        redirect(url_for(".render_main"))
+
     if "answer" in request.form:
         oldQuestionNum = int(request.args["qnum"]) -1
         oldQ = questions[oldQuestionNum-1]
@@ -55,6 +59,8 @@ def render_finPage():
 
         if oldQ["correct"] == request.form["answer"]:
             session["score"] = session["score"] + 1
+
+    session["finished"] = 1
 
     return render_template('finPage.html', score = session['score'])
 
