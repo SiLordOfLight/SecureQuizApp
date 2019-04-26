@@ -43,10 +43,6 @@ def renderQuestionPage():
         oldQuestionNum = int(request.args["qnum"]) -1
         oldQ = questions[oldQuestionNum-1]
 
-        if session["has_answered"][oldQuestionNum]:
-            session["did_cheat"] = True
-            redirect(url_for(".render_main"))
-
         session["has_answered"][oldQuestionNum] = True
 
         if oldQ["correct"] == request.form["answer"]:
