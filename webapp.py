@@ -45,6 +45,7 @@ def renderQuestionPage():
         oldQuestionNum = int(request.args["qnum"]) -1
         oldQ = questions[oldQuestionNum-1]
 
+        print("Last Question: %i" % oldQuestionNum)
         session["has_answered"][oldQuestionNum] = True
 
         if oldQ["correct"] == request.form["answer"]:
