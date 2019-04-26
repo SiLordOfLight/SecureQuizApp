@@ -36,6 +36,8 @@ def render_main():
 
 @app.route('/question', methods=['GET','POST'])
 def renderQuestionPage():
+    print(session["has_answered"])
+
     if session["finished"] == 1:
         redirect(url_for(".render_main"))
 
