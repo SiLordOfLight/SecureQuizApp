@@ -26,17 +26,22 @@ for i in range(1,numberOfQuestions+1):
 def render_main():
     session["score"] = 0
     session["finished"] = 0
+    session["has_answered"] = [False for _ in range(numberOfQuestions)]
 
     return render_template('home.html')
 
 @app.route('/question', methods=['GET','POST'])
 def renderQuestionPage():
-    if session["finishes"] == 1:
+    if session["finished"] == 1:
+        redirect(url_for(".render_main"))
+
+    if session["has_answered"][int(request.args["qnum"])]:
         redirect(url_for(".render_main"))
 
     if "answer" in request.form:
         oldQuestionNum = int(request.args["qnum"]) -1
         oldQ = questions[oldQuestionNum-1]
+        session["has_answered"][oldQuestionNum] = True
 
         if oldQ["correct"] == request.form["answer"]:
             session["score"] = session["score"] + 1
