@@ -1,5 +1,5 @@
 import os
-from flask import Flask, url_for, render_template, request, redirect
+from flask import Flask, url_for, render_template, request, redirect, flash
 from flask import redirect
 from flask import session
 import json
@@ -28,6 +28,10 @@ def render_main():
     session["finished"] = 0
     session["has_answered"] = [False for _ in range(numberOfQuestions)]
 
+    if "did_cheat" in session and session["did_cheat"]:
+        flash("NO CHEATING!")
+        session["did_cheat"] = False
+
     return render_template('home.html')
 
 @app.route('/question', methods=['GET','POST'])
@@ -35,12 +39,14 @@ def renderQuestionPage():
     if session["finished"] == 1:
         redirect(url_for(".render_main"))
 
-    if session["has_answered"][int(request.args["qnum"])]:
-        redirect(url_for(".render_main"))
-
     if "answer" in request.form:
         oldQuestionNum = int(request.args["qnum"]) -1
         oldQ = questions[oldQuestionNum-1]
+
+        if session["has_answered"][oldQuestionNum]:
+            session["did_cheat"] = True
+            redirect(url_for(".render_main"))
+
         session["has_answered"][oldQuestionNum] = True
 
         if oldQ["correct"] == request.form["answer"]:
